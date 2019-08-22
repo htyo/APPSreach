@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "utf-8">
+    <meta name=“viewport” content=“initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width”   />
+    <title="OPEN YOUR APPLICATION">
+  </head>
+  <body>
+
+        <a id="openApp">陌友App进入</a>
+
+        <script>
+            var ios_schema = "platform://shopDetal?userId=10965",
+                ios_download_url = "https://itunes.apple.com/cn/app/%E9%99%8C%E5%8F%8B-%E9%99%8C%E7%94%9F%E4%BA%BA%E4%BA%A4%E5%8F%8B/id1210615145?mt=8";
+            var android_schema = "唤醒协议",
+                android_download_url = "";
+            document.getElementById("openApp").onclick = function(e) {
+                if (/(Android)/i.test(navigator.userAgent)) {
+
+                    var ifr = document.createElement("iframe");
+                    ifr.style.display = "none";
+                    ifr.src = android_schema;
+                    document.body.appendChild(ifr);
+                    window.setTimeout(function() {
+                        document.body.removeChild(ifr);
+                        //                      if(confirm("检测到您手机可能没有安装app，您要前往下载君凯商联网app吗？")) {
+                        location.href = android_download_url; //打开app下载地址，有app同事提供
+                        //                      }
+                    }, 2000)
+
+                }
+
+                if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+
+                    var install = false;
+                    var loadTime = new Date();
+                    location.href = ios_schema;
+                    setTimeout(function() {
+                        var outTime = new Date()
+                        if (confirm("检测到您手机可能没有安装app,马上去苹果商店下载吧~ ")) {
+                            location.href = ios_download_url;
+                        }
+                    }, 2000)
+                }
+
+            }
+        </script>
+
+    </body>
+</html>
